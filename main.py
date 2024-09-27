@@ -9,11 +9,13 @@ def main():
     # aipromting.prompt_ai(prompt)
     # webscraper.scrapeVocab()
 
-    #all_links = webscraper.get_all_vocab_links()
-    #webscraper.get_all_vocab(all_links)
+    #scrape all links
+    all_links = webscraper.get_all_vocab_links()
+    webscraper.get_all_vocab(all_links)
 
     #dbsetup
-    dbsetup.dbsetup()
+    #dbsetup.dbsetup()
+
 
 
 

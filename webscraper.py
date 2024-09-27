@@ -1,4 +1,8 @@
 import requests, bs4
+import sqlite3
+
+conn = sqlite3.connect('databases/french_vocab.db')
+c = conn.cursor()
 
 def scrapeVocab(link, words):
     #download webpage
@@ -20,10 +24,11 @@ def scrapeVocab(link, words):
 
     #add all page words to dict
     for word in vocabWords:
-        #print(word)
         #Create dictionary
-        words[word.getText()] = title
-        #print(words)
+        #words[word.getText()] = title
+
+        #insert into db: word, topic, level
+        c.execute('''INSERT INTO frenchvocab VALUES(?,?,?)''', (words.getText(), title, 0))
 
 
 def get_all_vocab_links():
@@ -60,7 +65,10 @@ def get_all_vocab(all_links):
     for k,v in all_words.items():
         print(k + v)
 
-    print(len(all_words))
+    #print(len(all_words))
+
+    conn.commit()
+    conn.close()
 
 
 

@@ -9,7 +9,7 @@ def scrapeVocab(link, words):
     frenchSoup = bs4.BeautifulSoup(res.text, 'html.parser')
 
     #Get page title
-    title = frenchSoup.select('h1')
+    title = frenchSoup.select('h1')[0].getText()
 
     #get page words
     vocabWords = frenchSoup.select('span[class="txt--lang-foreign"]')
@@ -18,9 +18,13 @@ def scrapeVocab(link, words):
     #print(type(vocabWords))
     #print(len(vocabWords))
 
+    #add all page words to dict
     for word in vocabWords:
+        #print(word)
         #Create dictionary
-        words[title] = word.getText()
+        words[word.getText()] = title
+        #print(words)
+
 
 def get_all_vocab_links():
     res = requests.get("https://french.kwiziq.com/learn/theme")
@@ -31,12 +35,16 @@ def get_all_vocab_links():
 
     vocab_pages_html = frenchSoup.select('a[class="list-style__link"]')
 
-    #print(len(vocab_pages_html))
+    #testing with limited list
+    #vocab_pages_html = vocab_pages_html[0:5]
+
+    print("Number of pages: " + str(len(vocab_pages_html)))
 
     #extract links
     extracted_links = []
     for link in vocab_pages_html:
-        extracted_links.append(link.attrs['href'])
+        full_link = "https://french.kwiziq.com" + link.attrs['href']
+        extracted_links.append(full_link)
 
     #print(len(extracted_links))
 
@@ -44,14 +52,15 @@ def get_all_vocab_links():
 
 def get_all_vocab(all_links):
     all_words = {}
-    links = get_all_vocab_links()
 
     #iterate through links and add words to word dict
-    for link in links:
+    for link in all_links:
         scrapeVocab(link, all_words)
 
-    print(all_words)
+    for k,v in all_words.items():
+        print(k + v)
 
+    print(len(all_words))
 
 
 

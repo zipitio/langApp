@@ -1,5 +1,7 @@
 import webscraper
 import aiprompting
+import dbsetup
+
 
 def main():
     # check_api_key()
@@ -7,8 +9,11 @@ def main():
     # aipromting.prompt_ai(prompt)
     # webscraper.scrapeVocab()
 
-    all_links = webscraper.get_all_vocab_links()
-    webscraper.get_all_vocab(all_links)
+    #all_links = webscraper.get_all_vocab_links()
+    #webscraper.get_all_vocab(all_links)
+
+    #dbsetup
+    dbsetup.dbsetup()
 
 
 

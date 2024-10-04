@@ -4,14 +4,14 @@ import dbsetup
 
 
 def main():
-    # check_api_key()
+      aiprompting.check_api_key()
     # prompt = aipromting.user_input()
     # aipromting.prompt_ai(prompt)
     # webscraper.scrapeVocab()
 
     #scrape all links
-    all_links = webscraper.get_all_vocab_links()
-    webscraper.get_all_vocab(all_links)
+    #all_links = webscraper.get_all_vocab_links()
+    #webscraper.get_all_vocab(all_links)
 
     #dbsetup
     #dbsetup.dbsetup()

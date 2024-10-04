@@ -28,7 +28,7 @@ def scrapeVocab(link, words):
         #words[word.getText()] = title
 
         #insert into db: word, topic, level
-        c.execute('''INSERT INTO frenchvocab VALUES(?,?,?)''', (words.getText(), title, 0))
+        c.execute('''INSERT INTO frenchvocab VALUES(?,?,?)''', (word.getText(), title, 0))
 
 
 def get_all_vocab_links():
